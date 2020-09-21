@@ -1,5 +1,6 @@
 const bodyRef = document.querySelector("body");
-пше;
+const startBtnRef = document.querySelector('button[data-action="start"]');
+const stopBtnRef = document.querySelector('button[data-action="stop"]');
 
 const colors = [
   "#FFFFFF",
@@ -16,20 +17,26 @@ const randomIntegerFromInterval = (min, max) => {
 
 const changeColor = {
   intervalId: null,
+  isActive: false,
 
   start() {
+    if (this.isActive) {
+      return;
+    }
+
+    this.isActive = true;
     this.intervalId = setInterval(() => {
       bodyRef.style.backgroundColor =
         colors[randomIntegerFromInterval(0, colors.length)];
     }, 1000);
-    console.log(this.intervalId);
   },
 
   stop() {
-    clearInterval(this.interval);
-    // bodyRef.style.backgroundColor =
+    clearInterval(this.intervalId);
+    this.intervalId = null;
+    this.isActive = false;
   },
 };
 
-bodyRef.addEventListener("click", changeColor.start.bind(changeColor));
-bodyRef.addEventListener("click", changeColor.stop.bind(changeColor));
+startBtnRef.addEventListener("click", changeColor.start.bind(changeColor));
+stopBtnRef.addEventListener("click", changeColor.stop.bind(changeColor));
