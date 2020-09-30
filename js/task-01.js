@@ -17,6 +17,8 @@ const randomIntegerFromInterval = (min, max) => {
 
 const changeColor = {
   intervalId: null,
+
+  // I have been decided to remain isActive property for example. Attrubure 'disabled' is on the master branch using on the Start Button.
   isActive: false,
 
   start() {
